@@ -26,7 +26,49 @@ class Users {
       });
     });
   }
-  login(req, res) {}
+  async login(req, res) {
+    const { emailAdd, userPass } = await req.body;
+    // query
+    const query = `
+      SELECT firstName, lastName, gender, userDOB, emailAdd, userPass, profileUrl FROM Users WHERE emailAdd = ${emailAdd}
+    `;
+
+    db.query(query, [emailAdd], async (err, result) => {
+      if (err) throw err;
+      if (!result?.length) {
+        res.json({
+          status: res.statusCode,
+          msg: "You are providing the wrong email",
+        });
+      } else {
+        compare(userPass, result[0].userPass, (cerr, cresult) => {
+          if (cerr) throw cerr;
+          // Create a token
+          const token = createToken({
+            emailAdd,
+            userPass,
+          });
+          // Save A token
+          res.cookie("realUser", token, {
+            expires: new Date(Date.now() + 259200000),
+            httpOnly: true,
+          });
+          if (result) {
+            res.json({
+              msg: "Logged in!",
+              token,
+              cresult: cresult[0],
+            });
+          } else {
+            res.json({
+              status: res.statusCode,
+              msg: "Invalid login",
+            });
+          }
+        });
+      }
+    });
+  }
   async register(req, res) {
     const data = req.body;
     // Encrypt password
@@ -48,6 +90,10 @@ class Users {
       res.cookie("LegitUser", token, {
         expires: new Date(Date.now() + 259200000),
         httpOnly: true,
+      });
+      res.json({
+        status: res.statusCode,
+        msg: "User registered successfully!",
       });
     });
   }
@@ -80,4 +126,4 @@ class Users {
   alterUser(req, res) {}
 }
 
-module.exports = { Users };
+module.exports = Users;
