@@ -126,7 +126,6 @@ class Users {
       });
     });
   }
-  alterUser(req, res) {}
 }
 
 module.exports = Users;
