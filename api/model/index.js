@@ -6,5 +6,6 @@ const BookAuthors = require("./BookAuthors");
 module.exports = {
   users: new Users(),
   books: new Books(),
-  bookAuthors: new BookAuthors()
+  bookAuthors: new BookAuthors(),
+  orders: new Orders()
 };
