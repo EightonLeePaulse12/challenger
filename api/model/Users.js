@@ -27,10 +27,13 @@ class Users {
     });
   }
   async login(req, res) {
-    const { emailAdd, userPass } = await req.body;
+    const { emailAdd, userPass } = req.body;
     // query
     const query = `
-      SELECT firstName, lastName, gender, userDOB, emailAdd, userPass, profileUrl FROM Users WHERE emailAdd = ${emailAdd}
+      SELECT firstName, lastName,
+       gender, userDOB, emailAdd,
+        userPass, profileUrl FROM
+         Users WHERE emailAdd = ?
     `;
 
     db.query(query, [emailAdd], async (err, result) => {
@@ -41,7 +44,7 @@ class Users {
           msg: "You are providing the wrong email",
         });
       } else {
-        compare(userPass, result[0].userPass, (cerr, cresult) => {
+        await compare(userPass, result[0].userPass, (cerr, cresult) => {
           if (cerr) throw cerr;
           // Create a token
           const token = createToken({
@@ -53,7 +56,7 @@ class Users {
             expires: new Date(Date.now() + 259200000),
             httpOnly: true,
           });
-          if (result) {
+          if (cresult) {
             res.json({
               msg: "Logged in!",
               token,
