@@ -17,9 +17,10 @@ body {
 
 body {
   text-align: center;
-  background-color: rgb(215, 123, 84);
-  color: white;
-  text-shadow: 1px 1px burlywood;
+  background-color: rgb(255, 195, 169);
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px rgb(168, 101, 14);
+  font-weight: bold;
 }
 
 .container {
@@ -28,4 +29,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.cat {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+table,
+tr,
+td,
+th {
+  width: 96%;
+  border: 3px solid black;
+}
+
+.heading {
+  padding: 20px;
+  font-size: 2rem;
 }

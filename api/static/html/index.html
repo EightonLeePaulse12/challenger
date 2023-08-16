@@ -1,27 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../style/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../style/style.css" />
+  </head>
+  <body>
+    <div class="heading">
+        API route descriptions and methods
+    </div>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
     <div class="container">
-    <table>
+      <table>
         <thead>
-            <tr>
-                <th>Route</th>
-                <th>Description</th>
-            </tr>
+          <tr>
+            <th>Route</th>
+            <th>Method</th>
+            <th>Description</th>
+          </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Data goes here</td>
-                <td>Data goes here</td>
-            </tr>
+                <th colspan="3" class="cat">Users</th>
+              </tr>
+          <tr>
+            <td>/users</td>
+            <td>GET</td>
+            <td>Fetch all user data</td>
+          </tr>
+          <tr>
+            <td>/user/:id</td>
+            <td>GET</td>
+            <td>Fetch a single user's data</td>
+          </tr>
+          <tr>
+            <td>/register</td>
+            <td>POST</td>
+            <td>Register a new user</td>
+          </tr>
+          <tr>
+            <td>/user/:id</td>
+            <td>PATCH</td>
+            <td>Edit a user's data</td>
+          </tr>
+          <tr>
+            <td>/user/:id</td>
+            <td>DELETE</td>
+            <td>Delete a user from the database</td>
+          </tr>
+          <tr>
+            <td>/login</td>
+            <td>POST</td>
+            <td>Logs a user in</td>
+          </tr>
+          <tr>
+            <th colspan="3" class="cat">Books</th>
+          </tr>
+          <tr>
+            <td>/books</td>
+            <td>GET</td>
+            <td>Fetch all books data</td>
+          </tr>
+          <tr>
+            <td>/book/:id</td>
+            <td>GET</td>
+            <td>Fetch data from a single book</td>
+          </tr>
+          <tr>
+            <td>/book</td>
+            <td>POST</td>
+            <td>Add a new book</td>
+          </tr>
+          <tr>
+            <td>/book/:id</td>
+            <td>PATCH</td>
+            <td>Edit a book's data</td>
+          </tr>
+          <tr>
+            <td>/book/:id</td>
+            <td>DELETE</td>
+            <td>Delete a book's record</td>
+          </tr>
+          <tr>
+            <tr>
+                <th colspan="3" class="cat">Book Authors</th>
+              </tr>
+            <td>/bookauthors</td>
+            <td>GET</td>
+            <td>Get all book authors' data</td>
+          </tr>
+          <tr>
+            <td>/bookauthor/:id</td>
+            <td>GET</td>
+            <td>Get data from a single book author</td>
+          </tr>
+          <tr>
+            <td>/bookauthor</td>
+            <td>POST</td>
+            <td>Add a book's author</td>
+          </tr>
+          <tr>
+            <td>/bookauthor/:id</td>
+            <td>PATCH</td>
+            <td>Edit a book author's details</td>
+          </tr>
+          <tr>
+            <td>/bookauthor/:id</td>
+            <td>DELETE</td>
+            <td>Remove a book author's record</td>
+          </tr>
+          <tr>
+            <th colspan="3" class="cat">Orders</th>
+          </tr>
+          <tr>
+            <td>/orders</td>
+            <td>GET</td>
+            <td>Fetch all orders' data</td>
+          </tr>
+          <tr>
+            <td>/order/:id</td>
+            <td>GET</td>
+            <td>Fetch a single order's data</td>
+          </tr>
+          <tr>
+            <td>/addOrder/:orderID/:userID/:bookID</td>
+            <td>POST</td>
+            <td>Add an order</td>
+          </tr>
+          <tr>
+            <td>/order/:orderID</td>
+            <td>PATCH</td>
+            <td>Edit an order</td>
+          </tr>
+          <tr>
+            <td>/order/:orderID</td>
+            <td>DELETE</td>
+            <td>Delete an order</td>
+          </tr>
         </tbody>
-    </table>
-</div>
-</body>
+      </table>
+    </div>
+  </body>
 </html>
