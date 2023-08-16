@@ -32,16 +32,16 @@ routes.post("/login", bodyParser.json(), (req, res) => {
 routes.get("/books", (req, res) => {
   books.fetchBooks(req, res);
 });
-routes.get("/book/:id", (req, res) => {
+routes.get("/book/:bookID", (req, res) => {
   books.fetchBook(req, res);
 });
-routes.post("/newbook", bodyParser.json(), (req, res) => {
+routes.post("/book", bodyParser.json(), (req, res) => {
   books.addBook(req, res);
 });
-routes.patch("/book/:id", bodyParser.json(), (req, res) => {
+routes.patch("/book/:bookID", bodyParser.json(), (req, res) => {
   books.updateBook(req, res);
 });
-routes.delete("/book/:id", (req, res) => {
+routes.delete("/book/:bookID", (req, res) => {
   books.removeBook(req, res);
 });
 
@@ -52,7 +52,7 @@ routes.get("/bookauthors", (req, res) => {
 routes.get("/bookauthor/:id", (req, res) => {
   bookAuthors.fetchAuthor(req, res);
 });
-routes.post("/addauthor", bodyParser.json(), (req, res) => {
+routes.post("/bookauthor", bodyParser.json(), (req, res) => {
   bookAuthors.addAuthor(req, res);
 });
 routes.patch("/bookauthor/:id", bodyParser.json(), (req, res) => {
@@ -66,11 +66,21 @@ routes.delete("/bookauthor/:id", (req, res) => {
 routes.get("/orders", (req, res) => {
   orders.fetchOrders(req, res);
 });
-routes.get("/order/:id", (req, res) => {
+routes.get("/order/:orderID", (req, res) => {
   orders.fetchOrder(req, res);
 });
-routes.put("/update-order/:orderID", bodyParser.json(), (req, res) => {
+routes.post(
+  "/addOrder/:orderID/:userID/:bookID",
+  bodyParser.json(),
+  (req, res) => {
+    orders.insertOrder(req, res);
+  }
+);
+routes.patch("/order/:orderID", bodyParser.json(), (req, res) => {
   orders.updateOrder(req, res);
+});
+routes.delete("/order/:orderID", (req, res) => {
+  orders.removeOrder(req, res);
 });
 
 module.exports = {

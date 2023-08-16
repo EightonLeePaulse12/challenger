@@ -15,7 +15,7 @@ class Books {
   }
   fetchBook(req, res) {
     const query = `
-            SELECT * FROM Books WHERE bookID = ${req.params.id}
+            SELECT * FROM Books WHERE bookID = ${req.params.bookID}
         `;
 
     db.query(query, (err, data) => {
@@ -42,10 +42,10 @@ class Books {
   }
   removeBook(req, res) {
     const query = `
-            DELETE FROM BOOKS WHERE bookID = ${req.params.id}
+            DELETE FROM BOOKS WHERE bookID = ${req.params.bookID}
         `;
 
-    db.query(query, [req.params.id], (err) => {
+    db.query(query, [req.params.bookID], (err) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,
@@ -55,10 +55,10 @@ class Books {
   }
   updateBook(req, res) {
     const query = `
-            UPDATE Books SET ? WHERE bookID = ${req.params.id}
+            UPDATE Books SET ? WHERE bookID = ${req.params.bookID}
         `;
 
-    db.query(query, [req.body, req.params.id], (err) => {
+    db.query(query, [req.body, req.params.bookID], (err) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,

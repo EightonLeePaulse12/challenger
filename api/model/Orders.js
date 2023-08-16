@@ -31,7 +31,7 @@ class Orders {
          WHERE orderID = ${req.params.orderID};
         `;
 
-    db.query(query, [req.params.id], (err, results) => {
+    db.query(query, [req.params.orderID], (err, results) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,
@@ -41,12 +41,12 @@ class Orders {
   }
   insertOrder(req, res) {
     const query = `
-        INSERT INTO Orders VALUES(${req.params.orderID}, ${req.params.userID}, ${
-      req.params.bookID
-    }, ${new Date().now})
+        INSERT INTO Orders VALUES(${req.params.orderID}, ${
+      req.params.userID
+    }, ${req.params.bookID}, ${new Date().now})
         `;
 
-    db.query(query, [req.body, req.params], (err) => {
+    db.query(query, [req.body, req.params.orderID, req.params.userID, req.params.bookID], (err) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,
@@ -57,7 +57,15 @@ class Orders {
   async updateOrder(req, res) {
     const query = `
         UPDATE Orders SET orderDate = ${new Date().now}
-    `
+    `;
+
+    db.query(query, (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "Order date updated successfully",
+      });
+    });
   }
   removeOrder(req, res) {
     const query = `

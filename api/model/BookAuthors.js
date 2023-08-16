@@ -35,7 +35,7 @@ class BookAuthors {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        results: data,
+        msg: "Book Author added successfully.",
       });
     });
   }
