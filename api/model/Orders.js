@@ -41,18 +41,20 @@ class Orders {
   }
   insertOrder(req, res) {
     const query = `
-        INSERT INTO Orders VALUES(${req.params.orderID}, ${
-      req.params.userID
-    }, ${req.params.bookID}, ${new Date().now})
+        INSERT INTO Orders VALUES(?, ?, ?, '${new Date().getFullYear() + "-" + "0" + new Date().getMonth() + "-" + "0" + new Date().getDay()}');
         `;
 
-    db.query(query, [req.body, req.params.orderID, req.params.userID, req.params.bookID], (err) => {
-      if (err) throw err;
-      res.json({
-        status: res.statusCode,
-        msg: "Order added successfully",
-      });
-    });
+    db.query(
+      query,
+      [req.body.orderID, req.params.userID, req.params.bookID],
+      (err) => {
+        if (err) throw err;
+        res.json({
+          status: res.statusCode,
+          msg: "Order added successfully",
+        });
+      }
+    );
   }
   async updateOrder(req, res) {
     const query = `

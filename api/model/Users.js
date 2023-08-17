@@ -114,11 +114,14 @@ class Users {
     });
   }
   updateUser(req, res) {
+    const data = req.body;
+    if (data.userPass) {
+      data.userPass = hashSync(data.userpass, 15);
+    }
     const query = `
-        UPDATE Users SET ? where userID = ${req.params.id}
+        UPDATE Users SET ? where userID = ?
     `;
-
-    db.query(query, [req.body, req.params.id], (err) => {
+    db.query(query, [data, req.params.id], (err) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,

@@ -1,11 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { verifyAToken } = require("../middleware/AuthenticateUser");
 const routes = express.Router();
 // Import all model's objects
-const { users } = require("../model");
-const { books } = require("../model");
-const { bookAuthors } = require("../model");
-const { orders } = require("../model");
+const { users, books, bookAuthors, orders } = require("../model");
 
 // ============ User's router ==============
 
@@ -69,13 +67,9 @@ routes.get("/orders", (req, res) => {
 routes.get("/order/:orderID", (req, res) => {
   orders.fetchOrder(req, res);
 });
-routes.post(
-  "/addOrder/:orderID/:userID/:bookID",
-  bodyParser.json(),
-  (req, res) => {
-    orders.insertOrder(req, res);
-  }
-);
+routes.post("/order/:userID/:bookID", bodyParser.json(), (req, res) => {
+  orders.insertOrder(req, res);
+});
 routes.patch("/order/:orderID", bodyParser.json(), (req, res) => {
   orders.updateOrder(req, res);
 });
