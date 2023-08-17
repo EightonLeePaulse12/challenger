@@ -28,7 +28,7 @@ class Orders {
          ON Orders.userID = Users.userID 
          INNER JOIN Books 
          on Orders.bookID = Books.bookID
-         WHERE orderID = ${req.params.orderID};
+         WHERE orderID = '${req.params.orderID}';
         `;
 
     db.query(query, [req.params.orderID], (err, results) => {
@@ -41,7 +41,15 @@ class Orders {
   }
   insertOrder(req, res) {
     const query = `
-        INSERT INTO Orders VALUES(?, ?, ?, '${new Date().getFullYear() + "-" + "0" + new Date().getMonth() + "-" + "0" + new Date().getDay()}');
+        INSERT INTO Orders VALUES(?, ?, ?, '${
+          new Date().getFullYear() +
+          "-" +
+          "0" +
+          new Date().getMonth() +
+          "-" +
+          "0" +
+          new Date().getDay()
+        }');
         `;
 
     db.query(
@@ -58,7 +66,15 @@ class Orders {
   }
   async updateOrder(req, res) {
     const query = `
-        UPDATE Orders SET orderDate = ${new Date().now}
+        UPDATE Orders SET orderDate = '${
+          new Date().getFullYear() +
+          "-" +
+          "0" +
+          new Date().getMonth() +
+          "-" +
+          "0" +
+          new Date().getDay()
+        }'
     `;
 
     db.query(query, (err) => {
@@ -71,7 +87,7 @@ class Orders {
   }
   removeOrder(req, res) {
     const query = `
-        DELETE FROM Orders WHERE OrderID = ${req.params.orderID}
+        DELETE FROM Orders WHERE orderID = '${req.params.orderID}'
     `;
     db.query(query, [req.params.orderID], (err) => {
       if (err) throw err;
