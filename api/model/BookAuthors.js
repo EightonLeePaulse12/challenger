@@ -15,7 +15,7 @@ class BookAuthors {
   }
   fetchAuthor(req, res) {
     const query = `
-            SELECT id, authorName, authorSurname, bookID FROM BookAuthor WHERE id = ${req.params.id}
+            SELECT id, authorName, authorSurname, bookID FROM BookAuthor WHERE id = '${req.params.id}'
         `;
     db.query(query, (err, data) => {
       if (err) throw err;
@@ -41,7 +41,7 @@ class BookAuthors {
   }
   removeAuthor(req, res) {
     const query = `
-            DELETE FROM BookAuthor WHERE id = ${req.params.id}
+            DELETE FROM BookAuthor WHERE id = '${req.params.id}'
         `;
     db.query(query, [req.params.id], (err) => {
       if (err) throw err;
@@ -54,7 +54,7 @@ class BookAuthors {
   updateAuthor(req, res) {
     const data = req.body;
     const query = `
-            UPDATE BookAuthor SET ? WHERE id = ${req.params.id}
+            UPDATE BookAuthor SET ? WHERE id = '${req.params.id}'
         `;
     db.query(query, [data], (err) => {
       if (err) throw err;
